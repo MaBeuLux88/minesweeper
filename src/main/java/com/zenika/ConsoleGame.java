@@ -16,7 +16,7 @@ public class ConsoleGame {
     }
 
     private int promptAndReadInteger(String prompt, int min, int max) {
-        this.ps.println(prompt + " [" + min + "," + max + "]");
+        this.ps.println(prompt + " {" + min + "," + max + "}");
         int value = 0;
         boolean tryAgain;
 
@@ -28,7 +28,7 @@ public class ConsoleGame {
                 tryAgain = false;
             } catch (InputMismatchException exception) {
                 keyboard.nextLine();
-                this.ps.println("Positive Integers only, please try again.");
+                this.ps.println("Please enter only an integer within the range specified.");
                 this.ps.println(prompt);
                 tryAgain = true;
             }
@@ -42,9 +42,9 @@ public class ConsoleGame {
         this.ps.println("###############");
         this.ps.println("# Minesweeper #");
         this.ps.println("###############");
-        int nbColumns = promptAndReadInteger("Please enter the number of nbColumns", 2, 100);
-        int nbLines = promptAndReadInteger("Please enter the number of nbLines", 2, 50);
-        int nbMines = promptAndReadInteger("Please enter the number of nbMines", 1, nbColumns * nbLines - 1);
+        int nbColumns = promptAndReadInteger("How many columns?", 2, 100);
+        int nbLines = promptAndReadInteger("How many lines?", 2, 50);
+        int nbMines = promptAndReadInteger("How many mines?", 1, nbColumns * nbLines - 1);
 
         CellsGenerator cg = new CellsGenerator();
         Map<Position, Cell> cells = cg.generate(nbColumns, nbLines, nbMines);
@@ -55,8 +55,8 @@ public class ConsoleGame {
         GridState gridState;
         do {
             this.ps.println(grid.toString());
-            int column = promptAndReadInteger("Playing column", 1, nbColumns);
-            int line = promptAndReadInteger("Playing line", 1, nbLines);
+            int column = promptAndReadInteger("Select column to uncover", 1, nbColumns);
+            int line = promptAndReadInteger("Select line to uncover", 1, nbLines);
             gridState = ms.play(new Position(column, line));
         }
         while (gridState == GridState.NOT_CLEAR);
