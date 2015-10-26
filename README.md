@@ -27,3 +27,7 @@ You can also use Maven : `mvn clean compile exec:java`
 
 I used TDD to develop this Minesweeper. Tests can be run using maven with : `mvn test`
 
+## Fat Jar 
+
+You can also create a fat jar : 
+`mvn package` + `java -jar target/minesweeper-1.0-SNAPSHOT.jar`
